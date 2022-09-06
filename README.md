@@ -1,11 +1,11 @@
-# Getting Started with Create React App
+# buddyreads-front
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## API
+Book data is obtained from the [Google Books API](https://developers.google.com/books/docs/overview). 
 
-## Available Scripts
-
-In the project directory, you can run:
-
+## Schema
+[Link to Schema](https://docs.google.com/document/d/1JqPRsHvKuJ91vt7trL-vy4u-rRYuRFveIsFFFs5njlM/edit?usp=sharing)
+<!-- 
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -67,4 +67,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
