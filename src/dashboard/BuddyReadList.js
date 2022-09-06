@@ -38,49 +38,6 @@ const BuddyReadList = ({buddyReadList, type}) => {
             </Stack>
             </Item>
         </Grid>
-
-    // <Grid align='center' sx={{m: 2}}>
-    // <Typography variant="h5" component='div' sx={{mb: 1}}>{type} Buddy Reads</Typography>
-    //     <Stack spacing={1} sx={{ width: '75%' }}>
-    // {buddyReadList.map(br => (<Item component="button" key={br.id}>
-    //         <Link to={`/buddyreads/${br.id}`} style={{textDecoration: 'none', color: 'black' }}>                    
-    //             Buddy Read: {br.bookTitle} with {findBuddy(br).firstName}
-    //         </Link>
-    // </Item>))}
-    // </Stack>
-    // </Grid> 
-
-
-        //     {currentBooks.map(br => (
-        //         <Typography variant="h6" component='div' key={br.id}>
-        //             <Link to={`/buddyreads/${br.id}`} >
-        //                 Buddy Read: {br.bookData.title} with {br['buddy'].firstName}
-        //             </Link>
-        //         </Typography>
-        //     ))}
-        //     <Stack>
-        //     {currentBooks.map(br => (
-        //         <Item key={br.id}>
-        //             <Link to={`/buddyreads/${br.id}`} >
-        //                 Buddy Read: {br.bookData.title} with {br['buddy'].firstName}
-        //             </Link>
-        //         </Item>
-        //     ))}
-        //     </Stack>
-
-        //     {currentBooks.map(br => (
-        //         <Button key={br.id}>
-        //             <Link to={`/buddyreads/${br.id}`} >
-        //                 Buddy Read: {br.bookData.title} with {br['buddy'].firstName}
-        //             </Link>
-        //         </Button>
-        //     ))}
-        //     <Button>
-        //         <Link to="/login">
-        //             Login
-        //         </Link>
-        //     </Button>
-        // </Grid>
     )
 }
 
