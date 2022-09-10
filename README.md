@@ -8,7 +8,7 @@ This app allows users to track their progress and share their thoughts along the
 Posts are connected to a page number and are hidden to others until they are past that page to prevent spoilers. 
 
 ## Accessing the App
-[buddyreads.surge.sh](buddyreads.surge.sh)<br/>
+[buddyreads.surge.sh](buddyreads.surge.sh)<br/><br/>
  Here are some test user emails (all passwords are 'password'):
 * taylor@email.com
 * meghan@email.com
