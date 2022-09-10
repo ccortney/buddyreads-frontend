@@ -46,6 +46,7 @@ const NewBuddyRead = () => {
 
     const handleSearchSubmit = async (e) => {
         e.preventDefault();
+        setCreateSuccess(false);
         setFormErrors([])
         try {
             let res = await GoogleBooksApi.bookSearch(searchField);
