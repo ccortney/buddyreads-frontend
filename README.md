@@ -7,6 +7,13 @@ BuddyReads is for friends that want buddy read a book.
 This app allows users to track their progress and share their thoughts along the way. 
 Posts are connected to a page number and are hidden to others until they are past that page to prevent spoilers. 
 
+## Getting Started
+[buddyreads.surge.sh](buddyreads.surge.sh)
+Here are some test user emails (all passwords are 'password'):
+*taylor@email.com
+*meghan@email.com
+*harry@email.com
+
 ## API
 Book data is obtained from the [Google Books API](https://developers.google.com/books/docs/overview). 
 
