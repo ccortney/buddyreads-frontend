@@ -2,7 +2,7 @@ import axios from "axios";
 import defaultImage from "../bookcovernotfound.png"; 
 
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || "https://www.googleapis.com/books/v1/volumes";
+const BASE_URL = "https://www.googleapis.com/books/v1/volumes";
 
 /**
  * Static class tying together methods used to get/send to the Google Books Api. 
