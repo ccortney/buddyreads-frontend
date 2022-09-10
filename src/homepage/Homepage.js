@@ -3,6 +3,15 @@ import {Link} from "react-router-dom";
 import UserContext from "../auth/UserContext";
 import { Grid, Typography, Box, Button} from "@mui/material"
 
+/** Homepage of site.
+ *
+ * Shows welcome message or login/register buttons.
+ *
+ * Routed at /
+ *
+ * AppRoutes -> Homepage
+ */
+
 const Homepage = () => {
     const {currentUser} = useContext(UserContext);
 

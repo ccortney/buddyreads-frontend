@@ -14,6 +14,17 @@ import {    Typography,
             IconButton
         } from "@mui/material"
 
+/** Signup form.
+ *
+ * Shows form and manages update to state on changes.
+ * On submission:
+ * - calls signup function prop
+ * - redirects to / route
+ *
+ * AppRoutes -> SignupForm -> ErrorAlert
+ * Routed as /signup
+ */
+
 const SignupForm = ({signup}) => {
     const navigate = useNavigate();
 
@@ -23,7 +34,6 @@ const SignupForm = ({signup}) => {
         password: "", 
         firstName: "",
         lastName: "",
-        profilePicture: "",
         showPassword: false
     });
 
@@ -115,17 +125,6 @@ const SignupForm = ({signup}) => {
                     label="Last Name"
                     type="text"
                     value={formData.lasttName}
-                    onChange={handleChange}
-                />
-            </Box>
-            <Box>
-                <TextField
-                    sx={{m: 1, width: 520}}
-                    id="profilePicture"
-                    name="profilePicture"
-                    label="Profile Picture"
-                    type="text"
-                    value={formData.profilePicture}
                     onChange={handleChange}
                 />
             </Box>

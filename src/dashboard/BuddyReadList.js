@@ -4,6 +4,15 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import UserContext from "../auth/UserContext";
 
+/** Show page with list buddy reads (current or completed)
+ *
+ * It is rendered by Dashboard to show a list of buddy reads. 
+ * 
+ * When buddy read is clicked, book information is shown on a new page (/buddyread/:id)
+ * 
+ * Dashboard -> BuddyReadList
+ */
+
 
 const BuddyReadList = ({buddyReadList, type}) => {
     const {currentUser} = useContext(UserContext)

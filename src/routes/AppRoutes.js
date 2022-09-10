@@ -6,7 +6,15 @@ import Dashboard from  "../dashboard/Dashboard";
 import ProfileForm from "../forms/ProfileForm";
 import PrivateRoute from "./PrivateRoute"
 import BuddyReadDetails from "../buddyread/BuddyReadDetails";
-import BuddyReadForm from "../forms/BuddyReadForm";
+import NewBuddyRead from "../newbuddyread/NewBuddyRead"
+
+/** Site-wide routes.
+ *
+ * Parts of site should only be visitable when logged in. Those routes are
+ * wrapped by <PrivateRoute>, which is an authorization component.
+ *
+ * Visiting a non-existant route redirects to the homepage.
+ */
 
 const AppRoutes = ({login, signup, editProfile}) => {
     return (
@@ -21,7 +29,7 @@ const AppRoutes = ({login, signup, editProfile}) => {
                 <Route path="/dashboard" element={<Dashboard />}/>
             </Route>
             <Route path="/buddyreads/new" element={<PrivateRoute/>}>
-                <Route path="/buddyreads/new" element={<BuddyReadForm />}/>
+                <Route path="/buddyreads/new" element={<NewBuddyRead />}/>
             </Route>
             <Route path="/buddyreads/:id" element={<PrivateRoute/>}>
                 <Route path="/buddyreads/:id" element={<BuddyReadDetails />}/>

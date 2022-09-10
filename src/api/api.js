@@ -11,7 +11,7 @@ class BuddyReadApi {
     static token;
 
     static async request(endpoint, data = {}, method = "get") {
-        console.debug("API Call:", endpoint, data, method);
+        // console.debug("API Call:", endpoint, data, method);
 
         const url = `${BASE_URL}/${endpoint}`;
         const headers = { Authorization: `Bearer ${BuddyReadApi.token}`};
@@ -32,6 +32,12 @@ class BuddyReadApi {
     static async getUser(id) {
         let res = await this.request(`users/${id}`);
         return res.user;
+    }
+
+    /** Get user by email */
+    static async getUserbyEmail(email) {
+        let res = await this.request("users", {email});
+        return res.users[0];
     }
 
 
@@ -74,6 +80,12 @@ class BuddyReadApi {
     /** Get buddyread data */
     static async getBuddyRead(id) {
         let res = await this.request(`buddyreads/${id}`);
+        return res.buddyread;
+    }
+
+    /** Create new buddyread data */
+    static async createBuddyRead(data) {
+        let res = await this.request(`buddyreads`, data, "post");
         return res.buddyread;
     }
 

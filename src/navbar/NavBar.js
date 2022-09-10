@@ -4,6 +4,14 @@ import { AppBar, Toolbar, IconButton, Typography, Stack, Button } from "@mui/mat
 import AutoStoriesRoundedIcon from '@mui/icons-material/AutoStoriesRounded';
 import UserContext from "../auth/UserContext";
 
+/** Navigation bar for site. Shows up on every page.
+ *
+ * When user is logged in, shows links to main areas of site. When not,
+ * shows link to Login and Signup forms.
+ *
+ * Rendered by App.
+ */
+
 const NavBar = ({logout}) => {
     const {currentUser} = useContext(UserContext);
 

@@ -7,8 +7,21 @@ import BuddyReadList from "./BuddyReadList";
 import LoadingSpinner from "../common/LoadingSpinner";
 import { useNavigate } from "react-router-dom";
 
+/** Show page with list pending, current, and completed buddyreads.
+ *
+ * On mount, loads buddy reads from API and button to start new buddy read. 
+ * 
+ * When a pending buddy read book title is clicked, 
+ * book information is shown in a modal. When a completed or current buddy
+ * read is clicked, it takes users to a new page with book details. 
+ *
+ * This is routed to at /dashboard
+ *
+ * AppRoutes -> Dashboard -> { InviteList, BuddyReadList }
+ */
+
 const Dashboard = () =>  {
-    const {currentUser, setCurrentUser} = useContext(UserContext);
+    const {currentUser} = useContext(UserContext);
     const [pendingBuddyReads, setPendingBuddyReads] = useState([]);
     const [buddyReadInvites, setBuddyReadInvites] = useState([]);
     const [currentBuddyReads, setCurrentBuddyReads] = useState([]);
@@ -66,12 +79,7 @@ const Dashboard = () =>  {
                         updateStatus={updateStatus}
             /> 
 
-            <BuddyReadList 
-                buddyReadList={currentBuddyReads} 
-                setCompletedBuddyReads={setCompletedBuddyReads}
-                setCurrentBuddyReads={setCurrentBuddyReads}
-                type="Current"
-            />
+            <BuddyReadList buddyReadList={currentBuddyReads} type="Current"/>
             <BuddyReadList buddyReadList={completedBuddyReads} type="Completed"/>
         </Box>
             

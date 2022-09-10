@@ -6,6 +6,15 @@ import BuddyReadApi from "../api/api";
 import UserContext from "../auth/UserContext";
 import LoadingSpinner from "../common/LoadingSpinner";
 
+/** BuddyRead Detail page.
+ *
+ * Renders information about buddy read and book details. 
+ *
+ * Routed at /buddyread/:id
+ *
+ * AppRoutes -> BuddyReadDetails
+ */
+
 const BuddyReadDetails = () => {
     const {id} = useParams();
     const navigate = useNavigate();
@@ -16,15 +25,6 @@ const BuddyReadDetails = () => {
     const [bookData, setBookData] = useState({});
     const [buddy, setBuddy] = useState({})
     const [showButton, setShowButton] = useState(true)
-
-    console.debug(
-        "BuddyReadDetails", 
-        "bookData=", bookData, 
-        "buddy=", buddy, 
-        "buddyRead=", buddyRead
-      )
-    
-    const fakeData = `<b>HELLO</b> <i>HI</i>`
 
     useEffect(() => {    
         async function getBuddyReadData() {

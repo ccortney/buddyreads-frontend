@@ -14,6 +14,17 @@ import {    Typography,
             IconButton
         } from "@mui/material"
 
+/** Login form.
+ *
+ * Shows form and manages update to state on changes.
+ * On submission:
+ * - calls login function prop
+ * - redirects to / route
+ *
+ * AppRoutes -> LoginForm -> ErrorAlert
+ * Routed as /login
+ */
+
 const LoginForm = ({login}) => {
     const navigate = useNavigate();
 
@@ -45,7 +56,6 @@ const LoginForm = ({login}) => {
         delete formData.showPassword;
         let result = await login(formData);
         if (result.success) {
-            console.log("SUCCESS")
             navigate('/');
         } else {
             setFormErrors(result.errors);

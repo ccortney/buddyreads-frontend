@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot with no buddy reads 1`] = `
+<DocumentFragment>
+  <h2>
+    Loading...
+  </h2>
+</DocumentFragment>
+`;

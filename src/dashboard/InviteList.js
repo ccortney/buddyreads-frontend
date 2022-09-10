@@ -4,6 +4,15 @@ import { useState, useEffect } from "react";
 import GoogleBooksApi from "../api/bookApi";
 import "./Modal.css"
 
+/** Show page with list pending buddy reads and buddy read invites
+ *
+ * It is rendered by Dashboard to show a list of pending buddy reads. 
+ * 
+ * When book title is clicked, book information is shown in a modal. 
+ * 
+ * Dashboard -> InviteList
+ */
+
 
 const InviteList = ({pendingBuddyReads, buddyReadInvites, updateStatus}) => {
     const [open, setOpen] = useState(false);
@@ -84,7 +93,6 @@ const InviteList = ({pendingBuddyReads, buddyReadInvites, updateStatus}) => {
                             {br.createdBy.firstName} is inviting you to buddy read 
                                 <Button size ='small' 
                                         onClick={() => handleOpen(br.bookId)}
-                                        // sx={{ color: 'black', fontWeight: 'bold'}}
                                 >
                                     {br.bookTitle}
                                 </Button>.

@@ -1,10 +1,31 @@
 import { useState, useContext } from "react";
-import { Grid, TextField, Typography, FormControl, Button, InputLabel, OutlinedInput, InputAdornment, IconButton} from "@mui/material";
+import {    Grid, 
+            TextField, 
+            Typography, 
+            FormControl, 
+            Button, 
+            InputLabel, 
+            OutlinedInput, 
+            InputAdornment, 
+            IconButton} from "@mui/material";
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Visibility from '@mui/icons-material/Visibility';
 import UserContext from "../auth/UserContext";
 import ErrorAlert from "../common/ErrorAlert";
 import BuddyReadApi from "../api/api";
+
+/** Profile editing form.
+ *
+ * Displays profile form and password change form. 
+ * Handles changes to local form state.
+ * Submitting the form calls the API to save, and triggers user reloading
+ * throughout the site.
+ *
+ * Confirmation of a successful save is normally a simple <ErrorAlert>
+ *
+ * Routed as /profile
+ * AppRoutes -> ProfileForm -> ErrorAlert
+ */
 
 const ProfileForm = ({editProfile}) => {
     const { currentUser, setCurrentUser } = useContext(UserContext)
