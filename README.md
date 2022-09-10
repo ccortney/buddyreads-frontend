@@ -4,7 +4,7 @@
 Book data is obtained from the [Google Books API](https://developers.google.com/books/docs/overview). 
 
 ## Component Map
-[Link to Map](https://docs.google.com/presentation/d/1y4jqUoRgr937XaS9N4T_y8-DwmQZ8YhRdfJZ5jLhrxI/edit?usp=sharing)
+[Link to Map](https://docs.google.com/presentation/d/1y4jqUoRgr937XaS9N4T_y8-DwmQZ8YhRdfJZ5jLhrxI/present)
 
 <!-- 
 ### `npm start`
