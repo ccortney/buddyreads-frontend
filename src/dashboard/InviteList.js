@@ -36,7 +36,7 @@ const InviteList = ({pendingBuddyReads, buddyReadInvites, updateStatus}) => {
         }
 
         getBookData();
-    }, []);
+    }, [pendingBuddyReads, buddyReadInvites]);
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -79,7 +79,6 @@ const InviteList = ({pendingBuddyReads, buddyReadInvites, updateStatus}) => {
                                 Your buddy read with {br.buddy.firstName} for
                                         <Button 
                                             onClick={() => handleOpen(br.bookId)}
-                                            // sx={{ color: 'black', fontWeight: 'bold'}}
                                             size='small'
                                         >{br.bookTitle}</Button>
                                 is pending. 

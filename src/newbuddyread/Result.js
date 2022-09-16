@@ -23,15 +23,16 @@ import defaultImage from "../bookcovernotfound.png";
 
 const Result = ({book, formData, setFormData, handleFormChange, handleFormSubmit}) => {
   
+  
   const [expanded, setExpanded] = useState(false);
-  const [cleanedData, setCleanedData] = useState({
-      id: book.id,
-      title: book.volumeInfo.title, 
-      authors: 'unknown', 
-      publishedDate: 'unknown', 
-      pageCount: null,
-      image: defaultImage
-  })
+  // const [cleanedData, setCleanedData] = useState({
+  //     id: book.id,
+  //     title: book.volumeInfo.title, 
+  //     authors: 'unknown', 
+  //     publishedDate: 'unknown', 
+  //     pageCount: null,
+  //     image: defaultImage
+  // })
 
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
@@ -42,21 +43,22 @@ const Result = ({book, formData, setFormData, handleFormChange, handleFormSubmit
 }
 
   useEffect(() => {
-    if (book.volumeInfo.hasOwnProperty('authors')) {
-      setCleanedData(data => ({...data, authors: book.volumeInfo.authors.join(', ')}))
-    }
-    if (book.volumeInfo.hasOwnProperty('publishedDate')) {
-      setCleanedData(data => ({...data, publishedDate: book.volumeInfo.publishedDate}))
-    }
-    if (book.volumeInfo.hasOwnProperty('pageCount')) {
-      setCleanedData(data => ({...data, pageCount: book.volumeInfo.pageCount}))
-    }
-    if (book.volumeInfo.hasOwnProperty('imageLinks')) {
-      setCleanedData(data => ({...data, image: book.volumeInfo.imageLinks.thumbnail}))
-    }
-    if (book.volumeInfo.hasOwnProperty('industryIdentifiers')) {
-      setCleanedData(data => ({...data, isbn: book.volumeInfo.industryIdentifiers[0].identifier}))
-    }
+    console.log(`book: {book}`)
+  //   if (book.volumeInfo.hasOwnProperty('authors')) {
+  //     setCleanedData(data => ({...data, authors: book.volumeInfo.authors.join(', ')}))
+  //   }
+  //   if (book.volumeInfo.hasOwnProperty('publishedDate')) {
+  //     setCleanedData(data => ({...data, publishedDate: book.volumeInfo.publishedDate}))
+  //   }
+  //   if (book.volumeInfo.hasOwnProperty('pageCount')) {
+  //     setCleanedData(data => ({...data, pageCount: book.volumeInfo.pageCount}))
+  //   }
+  //   if (book.volumeInfo.hasOwnProperty('imageLinks')) {
+  //     setCleanedData(data => ({...data, image: book.volumeInfo.imageLinks.thumbnail}))
+  //   }
+  //   if (book.volumeInfo.hasOwnProperty('industryIdentifiers')) {
+  //     setCleanedData(data => ({...data, isbn: book.volumeInfo.industryIdentifiers[0].identifier}))
+  //   }
   }, [])
 
 
@@ -67,22 +69,23 @@ const Result = ({book, formData, setFormData, handleFormChange, handleFormSubmit
       <CardMedia
         component="img"
         sx={{width: 90, height: 135, p: 2}}
-        image={cleanedData.image}
+        image={book.image}
         alt="Live from space album cover"
       />
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
       <CardContent sx={{ flex: '1 0 auto' }}>
         <Typography component="div" variant="h6" noWrap={true}>
-          {cleanedData.title}
+          {book.title}
+          {console.log(`book: {book}`)}
         </Typography>
         <Typography variant="subtitle1" color="text.secondary"  noWrap={true}>
-          By {cleanedData.authors}
+          By {book.authors}
         </Typography>
         <Typography variant="subtitle1" color="text.secondary">
-          {cleanedData.pageCount} pages  |  Published: {cleanedData.publishedDate}
+          {book.pageCount} pages  |  Published: {book.publishedDate}
         </Typography>
         <Typography variant="subtitle1" color="text.secondary">
-          ISBN {cleanedData.isbn}
+          ISBN {book.isbn}
         </Typography>
 
       </CardContent>

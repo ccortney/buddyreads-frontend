@@ -8,6 +8,45 @@ const BASE_URL = "https://www.googleapis.com/books/v1/volumes";
  * Static class tying together methods used to get/send to the Google Books Api. 
  */
 
+/** Clean up data in case of missing fields */
+const cleanData = (res) => {
+    let cleanedData = {
+        id: res.id,
+        title: res.volumeInfo.title, 
+        authors: 'unknown',
+        publisher: 'unknown',  
+        publishedDate: 'unknown', 
+        description: 'unknown',  
+        pageCount: null,
+        image:  defaultImage,
+        isbn: 'unknown'
+    }
+
+    if (res.volumeInfo.hasOwnProperty('authors')) {
+        cleanedData = {...cleanedData, authors: res.volumeInfo.authors.join(', ')}
+    }
+    if (res.volumeInfo.hasOwnProperty('publisher')) {
+        cleanedData = {...cleanedData, publisher: res.volumeInfo.publisher}
+    }
+    if (res.volumeInfo.hasOwnProperty('publishedDate')) {
+        cleanedData = {...cleanedData, publishedDate: res.volumeInfo.publishedDate}
+    }
+    if (res.volumeInfo.hasOwnProperty('description')) {
+        cleanedData = {...cleanedData, description: res.volumeInfo.description}
+    }
+    if (res.volumeInfo.hasOwnProperty('pageCount')) {
+        cleanedData = {...cleanedData, pageCount: res.volumeInfo.pageCount}
+    }
+    if (res.volumeInfo.hasOwnProperty('imageLinks')) {
+        cleanedData = {...cleanedData, image: res.volumeInfo.imageLinks.thumbnail}
+    }
+    if (res.volumeInfo.hasOwnProperty('industryIdentifiers')) {
+        cleanedData = {...cleanedData, isbn: res.volumeInfo.industryIdentifiers[0].identifier}
+    }
+
+    return cleanedData
+}
+
 class GoogleBooksApi {
 
     static async request(endpoint, data = {}, method = "get") {
@@ -27,30 +66,20 @@ class GoogleBooksApi {
 
     // Individual API routes 
 
-    /** Get book data by book id */
-    static async getBook(id) {
-        let res = await this.request(`/${id}`);
-
-        let bookData = {
-            id: id,
-            title: res.volumeInfo.title, 
-            authors: res.volumeInfo.authors.join(', '),
-            publisher: res.volumeInfo.publisher || 'unknown',  
-            publishedDate: res.volumeInfo.publishedDate || 'unknown', 
-            description: res.volumeInfo.description || 'unknown',  
-            pageCount: res.volumeInfo.pageCount || 0,
-            image: res.volumeInfo.imageLinks || defaultImage,
-            isbn: res.volumeInfo.industryIdentifiers[0].identifier
-        }
-
-        return bookData;
-    }
-
     /** Search for book */
     static async bookSearch(phrase) {
         let res = await this.request(`?q=${phrase}`);
+        if (res.totalItems > 0) {
+            res = cleanData(res.items);
+        }
+        return res
+    }
 
-        return res;
+    /** Get book data by book id */
+    static async getBook(id) {
+        let res = await this.request(`/${id}`);
+        res = cleanData(res);
+        return res
     }
 
 }

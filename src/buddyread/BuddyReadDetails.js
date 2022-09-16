@@ -19,11 +19,9 @@ const BuddyReadDetails = () => {
     const {id} = useParams();
     const navigate = useNavigate();
     const {currentUser} = useContext(UserContext);
-
     const [infoLoaded, setInfoLoaded] = useState(false);
     const [buddyRead, setBuddyRead] = useState({})
     const [bookData, setBookData] = useState({});
-    const [buddy, setBuddy] = useState({})
     const [showButton, setShowButton] = useState(true)
 
     useEffect(() => {    
@@ -33,12 +31,10 @@ const BuddyReadDetails = () => {
                 if (buddyReadRes.createdBy.id !== currentUser.id && buddyReadRes.buddy.id !== currentUser.id) {
                     navigate('/dashboard')
                 }
-
-                let bookRes = await GoogleBooksApi.getBook(buddyReadRes.bookId);
-
-                setBookData(bookRes);
                 setBuddyRead(buddyReadRes);
-                setBuddy(buddyReadRes.buddy);
+                let bookRes = await GoogleBooksApi.getBook(buddyReadRes.bookId);
+                setBookData(bookRes);
+
                 if (buddyReadRes.status === 'completed') {
                     setShowButton(false)
                 }
@@ -50,7 +46,9 @@ const BuddyReadDetails = () => {
 
         setInfoLoaded(false);
         getBuddyReadData();
-    }, [id]);
+
+
+    }, [id, currentUser.id, navigate]);
 
     const handleClick = async (id,status) => {
         await BuddyReadApi.changeStatus(id, {status});
@@ -70,7 +68,7 @@ const BuddyReadDetails = () => {
             columnSpacing={2}
         >
             <Grid item>
-                <img src={bookData.image.thumbnail} />
+                <img src={bookData.image} alt={bookData.title}/>
             </Grid>
             <Grid item >
                 <Typography variant='h6' sx={{fontWeight: 'bold'}}>
@@ -86,7 +84,7 @@ const BuddyReadDetails = () => {
                     Published {bookData.publishedDate} by {bookData.publisher}
                 </Typography>
                 <Typography variant='subtitle1'>
-                    Buddy: {buddy.firstName} {buddy.lastName}
+                    Buddy: {buddyRead.buddy.firstName} {buddyRead.buddy.lastName}
                 </Typography>
                 {showButton === true ?
                     <Button color="success" 
