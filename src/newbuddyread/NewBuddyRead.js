@@ -13,7 +13,7 @@ import UserContext from "../auth/UserContext";
  * to enter buddy's email.  
  * Submitting the form calls the API to create new buddy read.
  *
- * Confirmation of a successful save is normally a simple <ErrorAlert>
+ * Confirmation of a successful save is a simple <ErrorAlert>
  *
  * This is routed to at /buddyreads/new
  *
