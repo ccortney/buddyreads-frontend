@@ -89,6 +89,24 @@ class BuddyReadApi {
         return res.buddyread;
     }
 
+    /** Get buddyread stat*/
+    static async getBuddyReadStat(buddyread, user) {
+        let res = await this.request(`buddyreadstats/${buddyread}/${user}`);
+        return res.buddyreadstat;
+    }
+
+    /** Update buddyread progress*/
+    static async updateProgress(buddyread, user, progress) {
+        let res = await this.request(`buddyreadstats/${buddyread}/${user}`, {progress}, "patch");
+        return res.buddyreadstat;
+    }
+
+    /** Create new buddyreadstat */
+    static async createBuddyReadStat (data) {
+        let res = await this.request(`buddyreadstats/`, data, "post");
+        return res.buddyreadstat;
+    }
+
 }
 
 
