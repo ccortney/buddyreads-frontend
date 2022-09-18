@@ -60,6 +60,9 @@ const Dashboard = () =>  {
         if (status === 'in-progress') {
             setBuddyReadInvites(buddyReadInvites.filter(invite => invite.id !== id));
             setCurrentBuddyReads(books => ([...books, buddyReadInvites.filter(invite => invite.id === id)[0]]));
+            const buddyRead = await BuddyReadApi.getBuddyRead(id);
+            BuddyReadApi.createBuddyReadStat({buddyreadId: buddyRead.id, userId: buddyRead.createdBy.id, progress: 0})
+            BuddyReadApi.createBuddyReadStat({buddyreadId: buddyRead.id, userId: buddyRead.buddy.id, progress: 0})
         } 
     }
 
