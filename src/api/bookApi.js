@@ -69,10 +69,13 @@ class GoogleBooksApi {
     /** Search for book */
     static async bookSearch(phrase) {
         let res = await this.request(`?q=${phrase}`);
+        let cleanRes = []
         if (res.totalItems > 0) {
-            res = cleanData(res.items);
+            for (let result of res.items) {
+                cleanRes.push(cleanData(result))
+            }
         }
-        return res
+        return cleanRes;
     }
 
     /** Get book data by book id */
