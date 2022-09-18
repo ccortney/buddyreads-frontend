@@ -25,42 +25,14 @@ const Result = ({book, formData, setFormData, handleFormChange, handleFormSubmit
   
   
   const [expanded, setExpanded] = useState(false);
-  // const [cleanedData, setCleanedData] = useState({
-  //     id: book.id,
-  //     title: book.volumeInfo.title, 
-  //     authors: 'unknown', 
-  //     publishedDate: 'unknown', 
-  //     pageCount: null,
-  //     image: defaultImage
-  // })
 
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
 
   const handleClick = (book) => {
-    setFormData(data => ({...data, bookId: book.id, bookTitle: book.volumeInfo.title}));
+    setFormData(data => ({...data, bookId: book.id, bookTitle: book.title}));
     setExpanded(!expanded);
-}
-
-  useEffect(() => {
-    console.log(`book: {book}`)
-  //   if (book.volumeInfo.hasOwnProperty('authors')) {
-  //     setCleanedData(data => ({...data, authors: book.volumeInfo.authors.join(', ')}))
-  //   }
-  //   if (book.volumeInfo.hasOwnProperty('publishedDate')) {
-  //     setCleanedData(data => ({...data, publishedDate: book.volumeInfo.publishedDate}))
-  //   }
-  //   if (book.volumeInfo.hasOwnProperty('pageCount')) {
-  //     setCleanedData(data => ({...data, pageCount: book.volumeInfo.pageCount}))
-  //   }
-  //   if (book.volumeInfo.hasOwnProperty('imageLinks')) {
-  //     setCleanedData(data => ({...data, image: book.volumeInfo.imageLinks.thumbnail}))
-  //   }
-  //   if (book.volumeInfo.hasOwnProperty('industryIdentifiers')) {
-  //     setCleanedData(data => ({...data, isbn: book.volumeInfo.industryIdentifiers[0].identifier}))
-  //   }
-  }, [])
-
+  }
 
   return (
 
@@ -70,13 +42,12 @@ const Result = ({book, formData, setFormData, handleFormChange, handleFormSubmit
         component="img"
         sx={{width: 90, height: 135, p: 2}}
         image={book.image}
-        alt="Live from space album cover"
+        alt={book.title}
       />
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
       <CardContent sx={{ flex: '1 0 auto' }}>
         <Typography component="div" variant="h6" noWrap={true}>
           {book.title}
-          {console.log(`book: {book}`)}
         </Typography>
         <Typography variant="subtitle1" color="text.secondary"  noWrap={true}>
           By {book.authors}

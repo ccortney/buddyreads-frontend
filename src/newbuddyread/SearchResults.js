@@ -13,7 +13,6 @@ import ErrorAlert from "../common/ErrorAlert";
 
 
 const SearchResults = ({books, setFormData, formData, handleFormChange, handleFormSubmit}) => {
-
     return (
         <Grid container spacing={2} sx={{pl: 2, pr: 2}}>
             {books ? books.map(book => (
