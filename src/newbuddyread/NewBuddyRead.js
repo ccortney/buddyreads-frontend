@@ -54,7 +54,7 @@ const NewBuddyRead = () => {
                 setFormErrors(["No Books Found"])
                 setBooks([])
             }
-            else setBooks([...res.items]);
+            else setBooks([...res]);
         } catch (errors) {
             setFormErrors(errors);
             return;
