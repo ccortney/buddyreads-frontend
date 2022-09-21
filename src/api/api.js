@@ -107,6 +107,24 @@ class BuddyReadApi {
         return res.buddyreadstat;
     }
 
+    /** Create new post */
+    static async createPost (data) {
+        let res = await this.request(`posts/`, data, "post");
+        return res.post;
+    }
+
+    /** Get posts */
+    static async getPosts (buddyreadId) {
+        let res = await this.request("posts", {buddyreadId});
+        return res.posts;
+    }
+
+    /** Update post */
+    static async updatePost (id, data) {
+        let res = await this.request(`posts/${id}`, data, "patch");
+        return res.post;
+    }
+
 }
 
 

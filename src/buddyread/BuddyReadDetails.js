@@ -8,6 +8,7 @@ import BuddyReadApi from "../api/api";
 import UserContext from "../auth/UserContext";
 import LoadingSpinner from "../common/LoadingSpinner";
 import Progress from "../progress/Progress";
+import Posts from "../post/Posts";
 
 /** BuddyRead Detail page.
  *
@@ -134,9 +135,6 @@ const BuddyReadDetails = () => {
                     </AccordionDetails>
                 </Accordion>
             </Grid> 
-            {/* <Grid container sx={{width: '75%', mt: 2}} variant='body2'>
-                <div dangerouslySetInnerHTML={{__html: bookData.description}}/>
-            </Grid>  */}
         </Grid>
         <Grid             
             container
@@ -151,6 +149,13 @@ const BuddyReadDetails = () => {
                 buddyRead={buddyRead} 
                 setProgress={setProgress}
                 bookData={bookData}
+            />
+        </Grid>
+        <Grid>
+            <Posts
+                bookData = {bookData}
+                buddyRead = {buddyRead}
+                progress={progress} 
             />
         </Grid>
     </Box>
