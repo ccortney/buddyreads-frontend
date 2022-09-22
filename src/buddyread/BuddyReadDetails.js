@@ -2,13 +2,15 @@ import { useParams, useNavigate } from "react-router-dom";
 import {useState, useEffect, useContext} from "react"
 import { Grid, Button, Typography, Box, Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
 import GoogleBooksApi from "../api/bookApi";
 import BuddyReadApi from "../api/api";
 import UserContext from "../auth/UserContext";
 import LoadingSpinner from "../common/LoadingSpinner";
 import Progress from "../progress/Progress";
 import Posts from "../post/Posts";
+import RatingDialog from "../rating/RatingDialog";
+import Rating from '@mui/material/Rating';
+
 
 /** BuddyRead Detail page.
  *
@@ -26,9 +28,11 @@ const BuddyReadDetails = () => {
     const [infoLoaded, setInfoLoaded] = useState(false);
     const [buddyRead, setBuddyRead] = useState({});
     const [bookData, setBookData] = useState({});
-    const [showButton, setShowButton] = useState(true);
     const [buddy, setBuddy] = useState({});
+    const [showButton, setShowButton] = useState(true)
     const [progress, setProgress] = useState({});
+    const [rating, setRating] = useState();
+    const [ratingOpen, setRatingOpen] = useState(false);
 
     useEffect(() => {    
         async function getBuddyReadData() {
@@ -47,11 +51,12 @@ const BuddyReadDetails = () => {
 
                 if (currentUser.id === buddyReadRes.createdBy.id) {
                     setBuddy(buddyReadRes.buddy);
-                    setProgress({currentUserProgress: createdByStats.progress, buddyProgress: buddyStats.progress})
-
+                    setProgress({currentUserProgress: createdByStats.progress, buddyProgress: buddyStats.progress});
+                    setRating(createdByStats.rating)
                 } else {
                     setBuddy(buddyReadRes.createdBy);
                     setProgress({buddyProgress: createdByStats.progress, currentUserProgress: buddyStats.progress})
+                    setRating(buddyStats.rating)
                 }
 
                 let bookRes = await GoogleBooksApi.getBook(buddyReadRes.bookId);
@@ -69,12 +74,10 @@ const BuddyReadDetails = () => {
         getBuddyReadData();
     }, [id, currentUser.id, navigate]);
 
-    const handleClick = async (id,status) => {
-        await BuddyReadApi.changeStatus(id, {status});
-        buddyRead.status = 'completed';
-        setShowButton(false);
-    }
-
+    const handleRatingOpen = () => {
+        setRatingOpen(true);
+    };
+  
     if (!infoLoaded) return <LoadingSpinner/>
 
     return (
@@ -100,20 +103,24 @@ const BuddyReadDetails = () => {
                 <Typography variant='subtitle1'>
                     Buddy: {buddy.firstName} {buddy.lastName}
                 </Typography>
-                {/* {showButton === true ?
-                    <Button color="success" 
-                            size='small' 
-                            variant="outlined"
-                            onClick={() => handleClick(buddyRead.id, 'completed')}>
-                        Complete Buddy Read
-                    </Button> :
-                    <Button color="success" 
-                        size='small' 
-                        variant="contained"
-                        disabled>
-                        Completed
-                    </Button>
-                } */}
+                {rating ?
+                    <Rating
+                        name="read-only"
+                        value={rating}
+                        readOnly
+                    />
+                    : null
+                }
+                <RatingDialog 
+                    bookData={bookData}
+                    buddyRead={buddyRead}
+                    ratingOpen={ratingOpen} 
+                    setRatingOpen={setRatingOpen}
+                    handleRatingOpen={handleRatingOpen} 
+                    rating={rating}
+                    setRating={setRating}
+                    progress={progress}
+                />
             </Grid>
             <Grid container sx={{width: '75%', mt: 2}} variant='body2'>
                 <Accordion>
@@ -149,6 +156,7 @@ const BuddyReadDetails = () => {
                 buddyRead={buddyRead} 
                 setProgress={setProgress}
                 bookData={bookData}
+                handleRatingOpen={handleRatingOpen}
             />
         </Grid>
         <Grid>
@@ -163,3 +171,5 @@ const BuddyReadDetails = () => {
 }
 
 export default BuddyReadDetails;
+
+

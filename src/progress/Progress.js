@@ -4,20 +4,25 @@ import UserContext from "../auth/UserContext";
 import ProgressForm from "./ProgressForm";
 import BuddyReadApi from "../api/api";
 import ErrorAlert from "../common/ErrorAlert";
+import RatingDialog from "../rating/RatingDialog";
 
 
-const Progress = ({progress, setProgress, buddy, buddyRead, bookData}) => {
+const Progress = ({progress, setProgress, buddy, buddyRead, bookData, handleRatingOpen}) => {
     const {currentUser} = useContext(UserContext);
     const [formData, setFormData] = useState({progress: ''});
     const [formErrors, setFormErrors] = useState([]);
     const [percents, setPercents] = useState({});
+    const [showForm, setShowForm] = useState(true)
 
     useEffect(() => {
         setPercents({
             currentUser: Math.floor((progress.currentUserProgress/bookData.pageCount)*100),
             buddy: Math.floor((progress.buddyProgress/bookData.pageCount)*100),
         })
-    }, [progress])
+        if (progress.currentUserProgress === bookData.pageCount) {
+            setShowForm(false);
+        }
+    }, [progress, bookData.pageCount])
 
     const handleChange = (e) => {
         const {value} = e.target;
@@ -44,10 +49,15 @@ const Progress = ({progress, setProgress, buddy, buddyRead, bookData}) => {
             setFormErrors(errors);
         }
 
-        setFormData({progress: ''});
-        if (progress.currentUserProgress === bookData.pageCount && progress.buddyProgress === bookData.pageCount) {
+        if (+formData.progress === bookData.pageCount) {
+            handleRatingOpen();
+            setShowForm(false);
+        }
+        if (+formData.progress === bookData.pageCount && progress.buddyProgress === bookData.pageCount) {
             await BuddyReadApi.changeStatus(buddyRead.id, {status: 'completed'});
         }
+        setFormData({progress: ''});
+
     }
     
     return (
@@ -60,11 +70,14 @@ const Progress = ({progress, setProgress, buddy, buddyRead, bookData}) => {
                 <Typography variant='subtitle1' sx={{fontWeight: 'bold'}}>
                     Page: {progress.currentUserProgress} |  {percents.currentUser}%
                 </Typography>
-                <ProgressForm
-                    formData={formData}
-                    handleChange={handleChange}
-                    handleSubmit={handleSubmit}
-            />
+                {showForm ? 
+                    <ProgressForm
+                        formData={formData}
+                        handleChange={handleChange}
+                        handleSubmit={handleSubmit}
+                    /> 
+                    : null
+                } 
             </Box>
             <Box sx={{ border: 1}}>
                 <Typography variant='subtitle1' sx={{fontWeight: 'light'}}>

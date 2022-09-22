@@ -8,6 +8,7 @@ const ProgressForm = ({formData, handleChange, handleSubmit}) => {
             <form onSubmit={handleSubmit}>
                 <Box sx={{ display: 'flex', justifyContent:  'center' }}>
                     <TextField
+                        label="Page"
                         id="progress"
                         name="progress"
                         value={formData.progress}

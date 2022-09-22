@@ -125,6 +125,18 @@ class BuddyReadApi {
         return res.post;
     }
 
+    /** Get Rating */
+    static async getRating (buddyread, user) {
+        let res = await this.request(`buddyreadstats/${buddyread}/${user}`);
+        return res.buddyreadstat;
+    }
+
+    /** Update Rating */
+    static async updateRating (buddyread, user, rating) {
+        let res = await this.request(`buddyreadstats/${buddyread}/${user}`, {rating}, "patch");
+        return res.budreadstat;
+    }
+
 }
 
 
