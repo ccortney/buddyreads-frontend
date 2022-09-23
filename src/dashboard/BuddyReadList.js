@@ -1,4 +1,4 @@
-import { Grid, Typography, Button, Stack, Paper } from "@mui/material";
+import { Grid, Typography, Button, Box, Stack, Paper } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -30,8 +30,9 @@ const BuddyReadList = ({buddyReadList, type}) => {
         else return br.createdBy
     }
 
+
     return (
-        <Grid align='center' sx={{m: 2}}>
+        <Box p={1}>
             <Typography variant="h5" component='div' sx={{mb: 1}}>{type} Buddy Reads</Typography>
             <Item sx={{ width: '75%' }}>
             <Stack spacing={1} >
@@ -46,7 +47,7 @@ const BuddyReadList = ({buddyReadList, type}) => {
                 </Button>))}
             </Stack>
             </Item>
-        </Grid>
+        </Box>
     )
 }
 

@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import UserContext from "../auth/UserContext";
 import InviteList from "./InviteList";
 import BuddyReadApi from "../api/api";
@@ -75,15 +75,29 @@ const Dashboard = () =>  {
     return (
         <Box sx={{ width: '100%' }} align='center'>
             <h2>{currentUser.firstName}'s Dashboard</h2>
-            <Button variant="contained" onClick={handleClick}>Start a new Buddy Read</Button>
+            <Button 
+                variant="contained" 
+                onClick={handleClick}
+                sx={{
+                    "&:hover": {
+                        backgroundColor: "primary.light"
+                    }
+                }}
+            >
+                Start a new Buddy Read
+            </Button>
+            <Stack direction="row" spacing={2} justifyContent="space-between">
+                <InviteList pendingBuddyReads={pendingBuddyReads} 
+                            buddyReadInvites={buddyReadInvites}
+                            updateStatus={updateStatus}
+                /> 
+                <Box flex={3} p={1}>
+                    <BuddyReadList buddyReadList={currentBuddyReads} type="Current"/>
+                    <BuddyReadList buddyReadList={completedBuddyReads} type="Completed"/>
+                </Box>   
+            </Stack>
 
-            <InviteList pendingBuddyReads={pendingBuddyReads} 
-                        buddyReadInvites={buddyReadInvites}
-                        updateStatus={updateStatus}
-            /> 
-
-            <BuddyReadList buddyReadList={currentBuddyReads} type="Current"/>
-            <BuddyReadList buddyReadList={completedBuddyReads} type="Completed"/>
+ 
         </Box>
             
         

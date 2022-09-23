@@ -7,6 +7,7 @@ import AppRoutes from "./routes/AppRoutes";
 import NavBar from "./navbar/NavBar"
 import BuddyReadApi from "./api/api";
 import { decodeToken } from "react-jwt";
+import { Box } from "@mui/material";
 
 /** Buddy Reads application.
  *
@@ -94,6 +95,7 @@ function App() {
 
   /** Handles site-wide logout. */
   function logout() {
+    console.log('made it to logout function')
     setToken(null);
     setCurrentUser(null);
   }
@@ -105,13 +107,13 @@ function App() {
     <BrowserRouter>
       <UserContext.Provider
         value = {{currentUser, setCurrentUser}}>
-        <div className = "App">
+        <Box className = "App">
             <NavBar logout={logout}/>
             <AppRoutes  login={login} 
                         signup={signup} 
                         editProfile={editProfile}
             />
-        </div>
+        </Box>
       </UserContext.Provider>
     </BrowserRouter>
   );

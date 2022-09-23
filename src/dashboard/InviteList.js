@@ -1,3 +1,4 @@
+import { Check, Close } from "@mui/icons-material";
 import { Grid, Typography, Box, Chip, Stack, Paper, Modal, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useState, useEffect } from "react";
@@ -55,7 +56,7 @@ const InviteList = ({pendingBuddyReads, buddyReadInvites, updateStatus}) => {
     bgcolor: 'background.paper',
     border: '1px solid #000',
     boxShadow: 24,
-    p: 4
+    // p: 4
     };
       
     const handleOpen = async (id) => {
@@ -66,7 +67,7 @@ const InviteList = ({pendingBuddyReads, buddyReadInvites, updateStatus}) => {
     const handleClose = () => setOpen(false);
 
     return (
-        <Grid align='center' sx={{m: 2}}>
+        <Box bgcolor="skyblue" flex={1} p={1} sx={{display: {xs: "none", sm: "block"}}}>
             <Typography variant="h5" component='div' sx={{mb: 1}}>Buddy Read Invites</Typography>
             <Item spacing={1} sx={{ width: '75%' }}>
                 <Stack>
@@ -96,8 +97,8 @@ const InviteList = ({pendingBuddyReads, buddyReadInvites, updateStatus}) => {
                                     {br.bookTitle}
                                 </Button>.
                         </Typography>
-                        <Chip label="Accept" color="success" size="small" sx={{mr: 1}} onClick={() => updateStatus(br.id, 'in-progress')}/>
-                        <Chip label="Decline" color="error" size="small" sx={{ml: 1}} onClick={() => updateStatus(br.id, 'rejected')}/>
+                        <Chip icon={<Check/>} label="Accept" color="success" size="small" sx={{mr: 1}} onClick={() => updateStatus(br.id, 'in-progress')}/>
+                        <Chip icon={<Close/>} label="Decline" color="error" size="small" sx={{ml: 1}} onClick={() => updateStatus(br.id, 'rejected')}/>
                         </Box>))}
                     </Stack>
                 }
@@ -122,7 +123,7 @@ const InviteList = ({pendingBuddyReads, buddyReadInvites, updateStatus}) => {
                 </Box>
             </Modal>
 
-        </Grid>
+        </Box>
 
         
     )
