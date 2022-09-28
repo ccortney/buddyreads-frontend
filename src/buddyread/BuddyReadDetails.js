@@ -1,24 +1,21 @@
 import { useParams, useNavigate } from "react-router-dom";
 import {useState, useEffect, useContext} from "react"
-import { Grid, Button, Typography, Box, Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Typography, Box,  Button, Stack } from "@mui/material";
 import GoogleBooksApi from "../api/bookApi";
 import BuddyReadApi from "../api/api";
 import UserContext from "../auth/UserContext";
 import LoadingSpinner from "../common/LoadingSpinner";
 import Progress from "../progress/Progress";
 import Posts from "../post/Posts";
-import RatingDialog from "../rating/RatingDialog";
-import Rating from '@mui/material/Rating';
-
+import BookModal from "../bookmodal/BookModal";
 
 /** BuddyRead Detail page.
  *
  * Renders information about buddy read and book details. 
  *
- * Routed at /buddyread/:id
+ * Routed at /buddyreads/:id
  *
- * AppRoutes -> BuddyReadDetails
+ * AppRoutes -> BuddyReadDetails -> BookModal
  */
 
 const BuddyReadDetails = () => {
@@ -29,15 +26,15 @@ const BuddyReadDetails = () => {
     const [buddyRead, setBuddyRead] = useState({});
     const [bookData, setBookData] = useState({});
     const [buddy, setBuddy] = useState({});
-    const [showButton, setShowButton] = useState(true)
     const [progress, setProgress] = useState({});
-    const [rating, setRating] = useState();
-    const [ratingOpen, setRatingOpen] = useState(false);
+    const [rating, setRating] = useState({});
+    const [bookInfoOpen, setBookInfoOpen] = useState(false);
 
     useEffect(() => {    
         async function getBuddyReadData() {
-            try {
+            try {           
                 let buddyReadRes = await BuddyReadApi.getBuddyRead(id);
+     
                 if (buddyReadRes.status === 'pending') {
                     navigate('/dashboard')
                 }
@@ -52,21 +49,20 @@ const BuddyReadDetails = () => {
                 if (currentUser.id === buddyReadRes.createdBy.id) {
                     setBuddy(buddyReadRes.buddy);
                     setProgress({currentUserProgress: createdByStats.progress, buddyProgress: buddyStats.progress});
-                    setRating(createdByStats.rating)
+                    setRating({currentUserRating: createdByStats.rating, buddyRating: buddyStats.rating})
                 } else {
                     setBuddy(buddyReadRes.createdBy);
                     setProgress({buddyProgress: createdByStats.progress, currentUserProgress: buddyStats.progress})
-                    setRating(buddyStats.rating)
+                    setRating({currentUserRating: buddyStats.rating, buddyRating: createdByStats.rating})
+
                 }
 
                 let bookRes = await GoogleBooksApi.getBook(buddyReadRes.bookId);
                 setBookData(bookRes);
 
-                if (buddyReadRes.status === 'completed') {
-                    setShowButton(false)
-                }
             } catch (err) {
                 console.error("Error loading buddy read", err);
+                navigate('/dashboard')
             }
             setInfoLoaded(true)
         }
@@ -74,102 +70,67 @@ const BuddyReadDetails = () => {
         getBuddyReadData();
     }, [id, currentUser.id, navigate]);
 
-    const handleRatingOpen = () => {
-        setRatingOpen(true);
-    };
+    const handleBookInfoClose = () => setBookInfoOpen(false);
   
     if (!infoLoaded) return <LoadingSpinner/>
 
     return (
-    <Box>  
-        <Grid
-            container
-            direction="row"
-            justifyContent='center'
-            alignItems='center'
-            sx={{mt: 2}} 
-            columnSpacing={2}
-        >
-            <Grid item>
-                <img src={bookData.image} alt={bookData.title}/>
-            </Grid>
-            <Grid item >
-                <Typography variant='h6' sx={{fontWeight: 'bold'}}>
-                    {bookData.title}
+        <Box sx={{ width: '100%' }}>
+            <Box sx={{pt: 2, pb: {xs: 0, sm: 2}}}>
+                <Typography align="center" sx={{fontSize: {xs: '0.7rem', sm: '1.3rem'}}}>
+                    Buddy Read for {bookData.title}
                 </Typography>
-                <Typography sx={{fontWeight: 'bold'}}>
-                    by {bookData.authors}
-                </Typography>
-                <Typography variant='subtitle1'>
-                    Buddy: {buddy.firstName} {buddy.lastName}
-                </Typography>
-                {rating ?
-                    <Rating
-                        name="read-only"
-                        value={rating}
-                        readOnly
-                    />
-                    : null
-                }
-                <RatingDialog 
-                    bookData={bookData}
-                    buddyRead={buddyRead}
-                    ratingOpen={ratingOpen} 
-                    setRatingOpen={setRatingOpen}
-                    handleRatingOpen={handleRatingOpen} 
-                    rating={rating}
-                    setRating={setRating}
-                    progress={progress}
-                />
-            </Grid>
-            <Grid container sx={{width: '75%', mt: 2}} variant='body2'>
-                <Accordion>
-                    <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
+            </Box>
+
+            <Stack direction={{xs: "column", sm: "row"}} sx={{mx: 2}}>
+
+                <Box align="center">
+                    <Box sx={{display: {xs: 'none', sm: 'block'}}}>
+                        <img 
+                            src={bookData.image} 
+                            alt={bookData.title}     
+                        />
+                    </Box>
+                    <Button 
+                        sx={{size: 'small', color: "darkgrey", display: 'block'}}
+                        onClick={() => setBookInfoOpen(true)}
                     >
-                    <Typography>Book Details</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                    <Typography variant='subtitle1' sx={{fontWeight: 'light'}}>
-                        {bookData.pageCount} pages  |  ISBN: {bookData.isbn}
-                    </Typography>
-                    <Typography variant='subtitle1' sx={{fontWeight: 'light'}}>
-                        Published {bookData.publishedDate} by {bookData.publisher}
-                    </Typography>
-                    <div dangerouslySetInnerHTML={{__html: bookData.description}}/>
-                    </AccordionDetails>
-                </Accordion>
-            </Grid> 
-        </Grid>
-        <Grid             
-            container
-            direction="row"
-            justifyContent='center'
-            alignItems='center'
-            sx={{mt: 2}} 
-            columnSpacing={2}>
-            <Progress 
-                progress={progress} 
-                buddy={buddy} 
-                buddyRead={buddyRead} 
-                setProgress={setProgress}
+                        About Book
+                    </Button>
+                    <Box>
+                        <Progress 
+                            progress={progress} 
+                            buddy={buddy} 
+                            bookData={bookData}
+                            buddyRead={buddyRead}
+                            setProgress={setProgress}
+                            rating={rating}
+                            setRating={setRating}
+                        />
+                    </Box>
+                </Box>
+
+                <Box flex={1}>
+                    <Posts
+                    bookData = {bookData}
+                    buddyRead = {buddyRead}
+                    progress={progress} 
+                    />
+                </Box>
+
+            </Stack> 
+
+            <BookModal
+                open={bookInfoOpen}
+                handleClose={handleBookInfoClose}
                 bookData={bookData}
-                handleRatingOpen={handleRatingOpen}
             />
-        </Grid>
-        <Grid>
-            <Posts
-                bookData = {bookData}
-                buddyRead = {buddyRead}
-                progress={progress} 
-            />
-        </Grid>
-    </Box>
+        </Box>
     )
 }
 
 export default BuddyReadDetails;
+
+
 
 
