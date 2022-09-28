@@ -1,22 +1,36 @@
-import {useState, useEffect, useContext} from "react"
-import { Grid, Button, Typography, Box } from "@mui/material";
+import { Box, Divider, Chip } from "@mui/material";
 import NewPostForm from "./NewPostForm";
 import ErrorAlert from "../common/ErrorAlert";
 
-const Post = ({formData, formErrors, handleChange, handleSubmit}) => {
+/** Show NewPost component. 
+ * 
+ * This component doesn't *do* the searching, but it renders the new post
+ * form and calls the `handleSubmit` function prop that runs in 
+ * Posts component to do the searching.
+ * 
+ * Confirmation of a successful save is a simple <ErrorAlert>
+ *
+ * Rendered by Posts component
+ * 
+ * {Posts} -> {NewPost} -> { NewPostForm, ErrorAlert }
+ */
 
+const NewPost = ({formData, formErrors, handleChange, handleSubmit}) => {
 
     return (
-        <Box sx={{border:1}}>
-            <Button variant="contained">Create New Post</Button>
-            {formErrors.length ? <ErrorAlert severity='error' messages={formErrors}/> : null } 
+        <Box>
             <NewPostForm
                 formData={formData}
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
+                
             />
+            {formErrors.length ? <ErrorAlert severity='error' messages={formErrors}/> : null } 
+            <Divider sx={{pt: 2}}>
+                <Chip label="DISCUSSION BELOW" sx={{color: "white", bgcolor: "primary.main"}}/>
+            </Divider>
         </Box>
     )
 }
 
-export default Post;
+export default NewPost;
