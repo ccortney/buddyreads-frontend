@@ -1,47 +1,48 @@
 import { useContext, useState, useEffect } from "react";
-import { Box, Button, Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import UserContext from "../auth/UserContext";
-import InviteList from "./InviteList";
 import BuddyReadApi from "../api/api";
 import BuddyReadList from "./BuddyReadList";
 import LoadingSpinner from "../common/LoadingSpinner";
-import { useNavigate } from "react-router-dom";
+import InviteList from "./InviteList";
+import Sidebar from "./Sidebar";
+import NewBuddyRead from "../newbuddyread/NewBuddyRead";
 
-/** Show page with list pending, current, and completed buddyreads.
+/** Show page with list new buddyread search, invites, current, and completed buddyreads.
  *
- * On mount, loads buddy reads from API and button to start new buddy read. 
+ * On mount, loads buddyreads book search from API and a sidebar that changes what is
+ * shown to users: search, invites, current, and completed.
  * 
- * When a pending buddy read book title is clicked, 
- * book information is shown in a modal. When a completed or current buddy
+ * When a pending buddy read book title image is clicked, 
+ * book information is shown in BookModal. When a completed or current buddy
  * read is clicked, it takes users to a new page with book details. 
  *
  * This is routed to at /dashboard
  *
- * AppRoutes -> Dashboard -> { InviteList, BuddyReadList }
+ * AppRoutes -> Dashboard -> { NewBuddyRead, InviteList, BuddyReadList }
  */
 
 const Dashboard = () =>  {
     const {currentUser} = useContext(UserContext);
-    const [pendingBuddyReads, setPendingBuddyReads] = useState([]);
-    const [buddyReadInvites, setBuddyReadInvites] = useState([]);
     const [currentBuddyReads, setCurrentBuddyReads] = useState([]);
     const [completedBuddyReads, setCompletedBuddyReads] = useState([]);
     const [infoLoaded, setInfoLoaded] = useState(false)
-    const navigate = useNavigate()
+    const [showComponent, setShowComponent] = useState({
+        add: true, 
+        invites: false, 
+        current: false, 
+        completed: false
+    })
 
     useEffect(() => {    
         async function getBuddyReadData() {
         try {
             const buddyReads = await BuddyReadApi.getBuddyReads(currentUser.id);
             const invites = await BuddyReadApi.getInvites(currentUser.id);
-            setPendingBuddyReads(buddyReads.filter(br => br.status === 'pending'));
             setCurrentBuddyReads([  ...buddyReads.filter(br => br.status === 'in-progress'), 
                                     ...invites.filter(br => br.status === 'in-progress')]);
             setCompletedBuddyReads([...buddyReads.filter(br => br.status === 'completed'), 
                                     ...invites.filter(br => br.status === 'completed')]);
-            setBuddyReadInvites(invites.filter(br => br.status === 'pending'));
-
-            
         } catch (err) {
             console.error("Error loading books", err);
         }
@@ -50,57 +51,40 @@ const Dashboard = () =>  {
 
         setInfoLoaded(false)
         getBuddyReadData();
-    }, []);
-
-    const updateStatus = async (id, status) => {
-        await BuddyReadApi.changeStatus(id, {status});
-        if (status === 'rejected') {
-            setBuddyReadInvites(buddyReadInvites.filter(invite => invite.id !== id));
-        } 
-        if (status === 'in-progress') {
-            setBuddyReadInvites(buddyReadInvites.filter(invite => invite.id !== id));
-            setCurrentBuddyReads(books => ([...books, buddyReadInvites.filter(invite => invite.id === id)[0]]));
-            const buddyRead = await BuddyReadApi.getBuddyRead(id);
-            BuddyReadApi.createBuddyReadStat({buddyreadId: buddyRead.id, userId: buddyRead.createdBy.id, progress: 0})
-            BuddyReadApi.createBuddyReadStat({buddyreadId: buddyRead.id, userId: buddyRead.buddy.id, progress: 0})
-        } 
-    }
-
-    const handleClick = () => {
-        navigate('/buddyreads/new')
-    }
+    }, [currentUser.id]);
 
     if (!infoLoaded) return <LoadingSpinner/>
 
     return (
         <Box sx={{ width: '100%' }} align='center'>
-            <h2>{currentUser.firstName}'s Dashboard</h2>
-            <Button 
-                variant="contained" 
-                onClick={handleClick}
-                sx={{
-                    "&:hover": {
-                        backgroundColor: "primary.light"
-                    }
-                }}
-            >
-                Start a new Buddy Read
-            </Button>
-            <Stack direction="row" spacing={2} justifyContent="space-between">
-                <InviteList pendingBuddyReads={pendingBuddyReads} 
-                            buddyReadInvites={buddyReadInvites}
-                            updateStatus={updateStatus}
-                /> 
-                <Box flex={3} p={1}>
-                    <BuddyReadList buddyReadList={currentBuddyReads} type="Current"/>
-                    <BuddyReadList buddyReadList={completedBuddyReads} type="Completed"/>
+            <Stack direction={{xs: 'column', sm: 'row'}}  justifyContent="space-between">
+                <Box flex={1} p={1}>
+                    <Sidebar setShowComponent={setShowComponent}/>
+                </Box>
+
+                <Box flex={7} p={1}>
+                    {showComponent.add ? 
+                        <NewBuddyRead/> 
+                        : null}
+                    {showComponent.invites ? 
+                            <InviteList
+                                setCurrentBuddyReads={setCurrentBuddyReads}/>
+                        : null}
+                    {showComponent.current ? 
+                        <BuddyReadList 
+                            buddyReadList={currentBuddyReads} 
+                            type="Current"/> 
+                        : null}
+                    {showComponent.completed ? 
+                        <BuddyReadList 
+                            buddyReadList={completedBuddyReads} 
+                            type="Completed"/> 
+                        : null}
                 </Box>   
             </Stack>
 
  
         </Box>
-            
-        
     )
 }
 
