@@ -2,8 +2,8 @@ import UserContext from "./auth/UserContext";
 
 const demoUser = {
   id: 0,
-  first_name: "testfirst",
-  last_name: "testlast",
+  firstName: "testfirst",
+  lastName: "testlast",
   email: "test@test.net",
 };
 
@@ -14,4 +14,11 @@ const UserProvider =
     </UserContext.Provider>
 );
 
-export { UserProvider };
+const NoUserProvider = 
+    ({ children, currentUser = null }) => (
+    <UserContext.Provider value={{ currentUser }}>
+      {children}
+    </UserContext.Provider>
+);
+
+export { UserProvider, NoUserProvider };
