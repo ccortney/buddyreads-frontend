@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import {useNavigate} from "react-router-dom";
+import UserContext from "../auth/UserContext";
 import ErrorAlert from "../common/ErrorAlert";
+import LoadingSpinner from "../common/LoadingSpinner";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import {    Typography,
-            Grid,  
             Box, 
+            Stack,
             TextField, 
             FormControl, 
             InputLabel, 
@@ -26,6 +28,8 @@ import {    Typography,
  */
 
 const SignupForm = ({signup}) => {
+    const {currentUser} = useContext(UserContext);
+    const [infoLoaded, setInfoLoaded] = useState(false);
     const navigate = useNavigate();
 
     const [formErrors, setFormErrors] = useState([]);
@@ -36,6 +40,13 @@ const SignupForm = ({signup}) => {
         lastName: "",
         showPassword: false
     });
+
+    useEffect(() => {
+        if (currentUser) {
+            navigate('/dashboard')
+        };
+        setInfoLoaded(true);
+    }, [currentUser, navigate])
 
     const handleClickShowPassword = () => {
         setFormData({
@@ -64,76 +75,76 @@ const SignupForm = ({signup}) => {
         }
     }
 
+    if (!infoLoaded) return <LoadingSpinner/>
+
     return (
-        <Grid container align='center' sx={{justifyContent:'center'}}>
-            <form onSubmit={handleSubmit}>
- 
-                <Typography gutterBottom variant="h5" component="div" sx={{pt: 3}}>
+        <Box display="flex" width='50%' alignItems="center" justifyContent="center" marginX="auto" marginTop={1}>
+        <form onSubmit={handleSubmit} >
+            <Box>
+                <Typography gutterBottom variant="h5" align='center' sx={{pt: 3}}>
                     Create an Account:
                 </Typography>
-            
-
-            <Box sx={{ display: 'flex', justifyContent:  'center' }}  onSubmit={handleSubmit}>
-                <div>
-                    <TextField
-                        label="Email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange = {handleChange}
-                        sx={{ m: 1, width: '25ch' }}
-                    />
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                        <InputLabel htmlFor="password">Password</InputLabel>
-                        <OutlinedInput
-                        id="password"
-                        type={formData.showPassword ? 'text' : 'password'}
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        endAdornment={
-                            <InputAdornment position="end">
-                            <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                edge="end"
-                            >
-                                {formData.showPassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                            </InputAdornment>
-                        }
-                        label="Password"
+            </Box>
+                <Stack direction='column'>
+                        <TextField
+                            sx={{ m: 1, width: 300 }}
+                            label="Email"
+                            id="email"
+                            name="email"
+                            required
+                            value={formData.email}
+                            onChange = {handleChange}
                         />
-                    </FormControl>
-                </div>  
-            </Box>
-            <Box >
-                <TextField
-                    sx={{m: 1, width: 250}}
-                    id="firstName"
-                    name="firstName"
-                    label="First Name"
-                    type="text"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                />
-                <TextField
-                    sx={{m: 1, width: 250}}
-                    id="name-input"
-                    name="lastName"
-                    label="Last Name"
-                    type="text"
-                    value={formData.lasttName}
-                    onChange={handleChange}
-                />
-            </Box>
+                        <TextField
+                            sx={{m: 1, width: 300}}
+                            id="firstName"
+                            name="firstName"
+                            label="First Name"
+                            type="text"
+                            required
+                            value={formData.firstName}
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            sx={{m: 1, width: 300}}
+                            id="name-input"
+                            name="lastName"
+                            label="Last Name"
+                            type="text"
+                            required
+                            value={formData.lasttName}
+                            onChange={handleChange}
+                        />
+                        <FormControl sx={{ m: 1, width: 300 }} variant="outlined">
+                            <InputLabel htmlFor="password">Password</InputLabel>
+                            <OutlinedInput
+                            id="password"
+                            type={formData.showPassword ? 'text' : 'password'}
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {formData.showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                                </InputAdornment>
+                            }
+                            label="Password"
+                            />
+                        </FormControl>
+                </Stack>
             <Box sx={{display: 'flex', justifyContent: 'right', m: 1}}>
-                <Button variant="contained" type="submit">Signup</Button>
+                <Button variant="contained" type="submit">Login</Button>
             </Box>
-            {formErrors.length ? <ErrorAlert severity='error' messages={formErrors}/> : null }
+            {formErrors.length ? <ErrorAlert severity='error' messages={formErrors}/> : null }   
         </form>
-    </Grid>
+    </Box>
     )
 }
 
