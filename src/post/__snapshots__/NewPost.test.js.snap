@@ -1,0 +1,152 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiBox-root css-0"
+  >
+    <div
+      class="MuiBox-root css-0"
+    >
+      <form>
+        <div
+          class="MuiStack-root css-1q36rmd-MuiStack-root"
+        >
+          <div
+            class="MuiBox-root css-1rr4qq7"
+          >
+            <div
+              class="MuiFormControl-root MuiTextField-root css-136h9lv-MuiFormControl-root-MuiTextField-root"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled Mui-required css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"
+                data-shrink="true"
+                for="message"
+                id="message-label"
+              >
+                Start a New Post
+                <span
+                  aria-hidden="true"
+                  class="MuiFormLabel-asterisk MuiInputLabel-asterisk css-wgai2y-MuiFormLabel-asterisk"
+                >
+                   *
+                </span>
+              </label>
+              <div
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-multiline css-dpjnhs-MuiInputBase-root-MuiOutlinedInput-root"
+              >
+                <textarea
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input"
+                  id="message"
+                  name="message"
+                  required=""
+                  rows="3"
+                  style="height: 0px; overflow: hidden;"
+                >
+                  message1
+                </textarea>
+                <textarea
+                  aria-hidden="true"
+                  class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input"
+                  readonly=""
+                  style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0); padding: 0px; width: 100%;"
+                  tabindex="-1"
+                />
+                <fieldset
+                  aria-hidden="true"
+                  class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                >
+                  <legend
+                    class="css-1in441m"
+                  >
+                    <span>
+                      Start a New Post *
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiStack-root css-1t704d9-MuiStack-root"
+          >
+            <div
+              class="MuiBox-root css-0"
+            >
+              <div
+                class="MuiFormControl-root MuiTextField-root css-1gzjkyy-MuiFormControl-root-MuiTextField-root"
+              >
+                <label
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"
+                  data-shrink="true"
+                  for="page"
+                  id="page-label"
+                >
+                  Page
+                </label>
+                <div
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+                    id="page"
+                    name="page"
+                    type="text"
+                    value="1"
+                  />
+                  <fieldset
+                    aria-hidden="true"
+                    class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                  >
+                    <legend
+                      class="css-1in441m"
+                    >
+                      <span>
+                        Page
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-kgh0nc"
+            >
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-sghohy-MuiButtonBase-root-MuiButton-root"
+                tabindex="0"
+                type="submit"
+              >
+                Post
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div
+      class="MuiDivider-root MuiDivider-fullWidth MuiDivider-withChildren css-ta5pq3-MuiDivider-root"
+      role="separator"
+    >
+      <span
+        class="MuiDivider-wrapper css-qywfm8-MuiDivider-wrapper"
+      >
+        <div
+          class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault css-18irk7v-MuiChip-root"
+        >
+          <span
+            class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+          >
+            DISCUSSION BELOW
+          </span>
+        </div>
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
