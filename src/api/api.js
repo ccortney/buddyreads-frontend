@@ -20,7 +20,7 @@ class BuddyReadApi {
         try {
             return (await axios({url, method, data, params, headers})).data;
         } catch (err) {
-            console.error("API Error:", err.response);
+            // console.error("API Error:", err.response);
             let message = err.response.data.error.message;
             throw Array.isArray(message) ? message : [message];
         }
@@ -123,6 +123,12 @@ class BuddyReadApi {
     static async updatePost (id, data) {
         let res = await this.request(`posts/${id}`, data, "patch");
         return res.post;
+    }
+
+    /** Delete post */
+    static async deletePost (id) {
+        let res = await this.request(`posts/${id}`, {}, "delete");
+        // return res.post;
     }
 
     /** Get Rating */
