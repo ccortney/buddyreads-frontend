@@ -1,11 +1,13 @@
-import {useContext} from "react";
-import {Link} from "react-router-dom";
+import {useContext, useEffect, useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
 import UserContext from "../auth/UserContext";
+import LoadingSpinner from "../common/LoadingSpinner";
 import { Grid, Typography, Box, Button} from "@mui/material"
 
 /** Homepage of site.
  *
- * Shows welcome message or login/register buttons.
+ * Shows welcome message or login/register buttons when not logged in
+ * Redirects to /dashboard when logged in
  *
  * Routed at /
  *
@@ -14,11 +16,22 @@ import { Grid, Typography, Box, Button} from "@mui/material"
 
 const Homepage = () => {
     const {currentUser} = useContext(UserContext);
+    const [infoLoaded, setInfoLoaded] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (currentUser) {
+            navigate('/dashboard')
+        };
+        setInfoLoaded(true);
+    }, [])
+
+    if (!infoLoaded) return <LoadingSpinner/>
 
     return (
         <Grid container align='center' spacing={2} direction="column" sx={{mt: 3}}>
             <Grid item>
-                <Typography variant="h2" fontWeight='fontWeightMedium'>
+                <Typography sx={{typography: {xs: 'h3', sm: 'h2'}}} >
                         BUDDY READS
                 </Typography>
             </Grid>

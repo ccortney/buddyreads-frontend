@@ -9,11 +9,11 @@ exports[`matches snapshot 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
-      <h2
-        class="MuiTypography-root MuiTypography-h2 css-10fld7o-MuiTypography-root"
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-gciz04-MuiTypography-root"
       >
         BUDDY READS
-      </h2>
+      </p>
     </div>
     <div
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -30,7 +30,7 @@ exports[`matches snapshot 1`] = `
       <h4
         class="MuiTypography-root MuiTypography-h4 css-5lbw0b-MuiTypography-root"
       >
-        Welcome back,  !
+        Welcome back, testfirst testlast!
       </h4>
     </div>
   </div>
@@ -46,11 +46,11 @@ exports[`matches snapshot when logged out 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
-      <h2
-        class="MuiTypography-root MuiTypography-h2 css-10fld7o-MuiTypography-root"
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-gciz04-MuiTypography-root"
       >
         BUDDY READS
-      </h2>
+      </p>
     </div>
     <div
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
