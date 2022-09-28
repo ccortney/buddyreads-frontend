@@ -1,18 +1,17 @@
 # buddyreads-frontend
 
-This app is currently in progress.
-
 ## Overview
 BuddyReads is for friends that want buddy read a book. 
 This app allows users to track their progress and share their thoughts along the way. 
 Posts are connected to a page number and are hidden to others until they are past that page to prevent spoilers. 
 
 <!-- ## Accessing the App
-[buddyreads.surge.sh](buddyreads.surge.sh)<br/><br/>
+[buddyreadsapp.surge.sh](https://buddyreadsapp.surge.sh/)<br/><br/>
+[Video walkthrough of my app](https://drive.google.com/file/d/1IeZdG1KzfSaW3YbKWjUGrzazyzwPOMbJ/view?usp=sharing)
  Here are some test user emails (all passwords are 'password'):
-* taylor@email.com
-* meghan@email.com
-* harry@email.com -->
+* suebird@wnba.com
+* candaceparker@wnba.com
+* ajawilson@wnba.com -->
 
 ## API
 Book data is obtained from the [Google Books API](https://developers.google.com/books/docs/overview). 
@@ -27,7 +26,8 @@ React
 https://github.com/ohmilla/buddyreads-backend
 
 ## Upcoming Features
-* Update and show progress
-* Create and show posts
-* Ensure responsive UI
+* User friendly error messages for backend schema issues
+* Confirm current password to change password
+* Make Loading Spinner component an actual spinner
+* Pagnation for BookSearch for more results
 
