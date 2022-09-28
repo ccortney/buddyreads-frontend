@@ -95,7 +95,6 @@ function App() {
 
   /** Handles site-wide logout. */
   function logout() {
-    console.log('made it to logout function')
     setToken(null);
     setCurrentUser(null);
   }
