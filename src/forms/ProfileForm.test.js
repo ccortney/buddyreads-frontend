@@ -9,7 +9,7 @@ it("matches snapshot", function () {
           <UserProvider>
             <ProfileForm />
           </UserProvider>
-      </MemoryRouter>,
+      </MemoryRouter>
   );
   expect(asFragment()).toMatchSnapshot();
 });

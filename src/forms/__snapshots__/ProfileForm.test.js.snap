@@ -16,7 +16,7 @@ exports[`matches snapshot 1`] = `
         <div
           class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-xhhpbl-MuiTypography-root"
         >
-          Edit Profile for 
+          Edit Profile for testfirst
         </div>
         <div
           class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column css-l6hioc-MuiGrid-root"
