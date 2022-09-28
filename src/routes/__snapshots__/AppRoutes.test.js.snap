@@ -2,37 +2,8 @@
 
 exports[`matches snapshot 1`] = `
 <DocumentFragment>
-  <div
-    align="center"
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-direction-xs-column css-iw00ie-MuiGrid-root"
-  >
-    <div
-      class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-    >
-      <h2
-        class="MuiTypography-root MuiTypography-h2 css-10fld7o-MuiTypography-root"
-      >
-        BUDDY READS
-      </h2>
-    </div>
-    <div
-      class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-    >
-      <h6
-        class="MuiTypography-root MuiTypography-subtitle1 css-10wpov9-MuiTypography-root"
-      >
-        Choose a book. Find a friend. Discuss as you go.
-      </h6>
-    </div>
-    <div
-      class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-    >
-      <h4
-        class="MuiTypography-root MuiTypography-h4 css-5lbw0b-MuiTypography-root"
-      >
-        Welcome back,  !
-      </h4>
-    </div>
-  </div>
+  <h2>
+    Loading...
+  </h2>
 </DocumentFragment>
 `;

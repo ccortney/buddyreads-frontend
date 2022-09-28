@@ -3,54 +3,61 @@
 exports[`matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1oqv2c0-MuiPaper-root-MuiCard-root"
+    class="MuiBox-root css-1wlz0sv"
   >
-    <img
-      alt="Live from space album cover"
-      class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-1qfy3jn-MuiCardMedia-root"
-      src="bookcovernotfound.png"
-    />
     <div
-      class="MuiBox-root css-j7qwjs"
+      align="left"
+      class="css-m69qwo-MuiStack-root"
     >
       <div
-        class="MuiCardContent-root css-1qaznj3-MuiCardContent-root"
+        class="MuiBox-root css-0"
       >
-        <div
-          class="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap css-1c2nc1y-MuiTypography-root"
-        >
-          title
-        </div>
+        <img
+          height="113"
+          width="75"
+        />
+      </div>
+      <div
+        class="MuiBox-root css-1iuj5ih"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+        />
         <h6
-          class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-noWrap css-1u7magf-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-noWrap css-1ldsceo-MuiTypography-root"
         >
-          By author
+          By 
         </h6>
         <h6
-          class="MuiTypography-root MuiTypography-subtitle1 css-ecpxie-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-hav9kw-MuiTypography-root"
         >
-          300 pages  |  Published: 12/12/1912
+           pages
         </h6>
         <h6
-          class="MuiTypography-root MuiTypography-subtitle1 css-ecpxie-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-subtitle2 css-hav9kw-MuiTypography-root"
+        >
+          Published: 
+        </h6>
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-hav9kw-MuiTypography-root"
         >
           ISBN 
         </h6>
       </div>
-      <div
-        class="MuiCardActions-root css-1rwjz6-MuiCardActions-root"
+    </div>
+    <div
+      class="MuiBox-root css-0"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
       >
-        <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-sghohy-MuiButtonBase-root-MuiButton-root"
-          tabindex="0"
-          type="button"
-        >
-          Start Buddy Read
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
-        </button>
-      </div>
+        Start Buddy Read
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
     </div>
   </div>
 </DocumentFragment>

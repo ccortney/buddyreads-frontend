@@ -4,7 +4,7 @@ exports[`matches snapshot 1`] = `
 <DocumentFragment>
   <div
     align="center"
-    class="MuiGrid-root MuiGrid-container css-1lym95h-MuiGrid-root"
+    class="MuiBox-root css-1tyndxa"
   >
     <form>
       <div
@@ -19,7 +19,7 @@ exports[`matches snapshot 1`] = `
             for="searchField"
             id="searchField-label"
           >
-            Book Title
+            Search for a Book
           </label>
           <div
             class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
@@ -40,7 +40,7 @@ exports[`matches snapshot 1`] = `
                 class="css-1ftyaf0"
               >
                 <span>
-                  Book Title
+                  Search for a Book
                 </span>
               </legend>
             </fieldset>

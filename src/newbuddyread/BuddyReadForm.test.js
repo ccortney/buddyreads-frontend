@@ -10,7 +10,7 @@ it("matches snapshot", function () {
                 buddy: "buddy@email.com"
             }}
         />
-      </MemoryRouter>,
+      </MemoryRouter>
   );
   expect(asFragment()).toMatchSnapshot();
 });
