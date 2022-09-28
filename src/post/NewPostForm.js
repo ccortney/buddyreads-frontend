@@ -1,37 +1,55 @@
-import { Grid, Box, TextField, Button, FormControl  } from "@mui/material";
-import { useState } from "react";
+import { Box, TextField, Button } from "@mui/material";
+import { Stack } from "@mui/system";
+
+/** New Post Form component
+ *
+ * Displays form to create post.
+ * Submitting the form calls the BuddyReadAPI to create new post and
+ * renders it in PostList. 
+ *  
+ * Rendered by NewPost component
+ *
+ * {NewPost} -> {NewPostForm}
+ */
 
 const NewPostForm = ({formData, handleChange, handleSubmit}) => {
 
     return (
-        <Grid container align='center' sx={{justifyContent:'center'}}>
+        <Box>
             <form onSubmit={handleSubmit}>
-                <Box sx={{ display: 'flex', justifyContent:  'center' }}>
-                    <FormControl sx={{ m: 1}}>
+                <Stack direction="row" spacing={1} alignItems="center">
+                    <Box flex={1}>
                         <TextField
-                            label="Page"
-                            id="page"
-                            name="page"
-                            value={formData.page}
-                            onChange = {handleChange}
-                        />
-                    </FormControl>
-                    <FormControl fullWidth sx={{ m: 1}}>
-                        <TextField
-                            label="Post Message"
+                            sx={{width: '100%'}}
                             id="message"
                             name="message"
+                            label="Start a New Post"
+                            required
                             multiline
+                            rows={3}
                             value={formData.message}
                             onChange = {handleChange}
                         />
-                    </FormControl>
-                    <Box sx={{display: 'flex', alignItems: 'center',  m: 1}}>
-                        <Button variant="contained" type="submit">Post</Button>
                     </Box>
-                </Box>
-            </form>
-        </Grid>
+
+                    <Stack direction="column" alignItems="center" spacing={1}>
+                        <Box>
+                            <TextField
+                                label="Page"
+                                id="page"
+                                name="page"
+                                value={formData.page}
+                                onChange = {handleChange}
+                                sx={{width: '8ch'}}
+                            />
+                        </Box>
+                        <Box sx={{display: 'flex', alignItems: 'center',  m: 1}}>
+                            <Button variant="contained" type="submit">Post</Button>
+                        </Box>
+                    </Stack>
+                </Stack>
+            </form> 
+        </Box>
     )
 }
 
