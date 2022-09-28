@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import NavBar from "./NavBar";
-import { UserProvider } from "../testUtils";
+import { NoUserProvider, UserProvider } from "../testUtils";
 
 it("renders without crashing", function () {
   render(
@@ -10,7 +10,7 @@ it("renders without crashing", function () {
         <UserProvider>
           <NavBar />
         </UserProvider>
-      </MemoryRouter>,
+      </MemoryRouter>
   );
 });
 
@@ -20,7 +20,7 @@ it("matches snapshot", function () {
         <UserProvider>
             <NavBar />
         </UserProvider>
-      </MemoryRouter>,
+      </MemoryRouter>
   );
   expect(asFragment()).toMatchSnapshot();
 });
@@ -28,10 +28,10 @@ it("matches snapshot", function () {
 it("matches snapshot when logged out", function () {
     const { asFragment } = render(
         <MemoryRouter>
-          <UserProvider currentUser={null}>
+          <NoUserProvider>
             <NavBar />
-          </UserProvider>
-        </MemoryRouter>,
+          </NoUserProvider>
+        </MemoryRouter>
     );
     expect(asFragment()).toMatchSnapshot();
   });
