@@ -93,7 +93,7 @@ const LoginForm = ({login}) => {
                                 sx={{ m: 1, width: '25ch' }}
                             />
                             <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                                <InputLabel htmlFor="password">Password</InputLabel>
+                                <InputLabel htmlFor="password">Password *</InputLabel>
                                 <OutlinedInput
                                 id="password"
                                 type={formData.showPassword ? 'text' : 'password'}

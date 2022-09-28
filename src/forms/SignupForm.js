@@ -121,6 +121,7 @@ const SignupForm = ({signup}) => {
                             id="password"
                             type={formData.showPassword ? 'text' : 'password'}
                             name="password"
+                            required
                             value={formData.password}
                             onChange={handleChange}
                             endAdornment={
