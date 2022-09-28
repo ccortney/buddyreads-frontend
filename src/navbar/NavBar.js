@@ -5,10 +5,13 @@ import AutoStoriesRoundedIcon from '@mui/icons-material/AutoStoriesRounded';
 import UserContext from "../auth/UserContext";
 import { Logout } from "@mui/icons-material";
 
-/** Navigation bar for site. Shows up on every page.
+/** Navigation bar for site. Shows at the top of every page.
  *
- * When user is logged in, shows links to main areas of site. When not,
- * shows link to Login and Signup forms.
+ * When user is logged in, shows avatar with dropdown menu to /dashboard, /profile, /logout.
+ * BuddyRead App logo redirects to /dashboard
+ * 
+ * When not, shows link to Login and Signup forms.
+ * BuddyRead App logo redirects to /
  *
  * Rendered by App.
  */
@@ -120,10 +123,9 @@ const NavBar = ({logout}) => {
         )
     }
 
-
     return (
-        <AppBar position='static' component="nav">
-            <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
+        <AppBar position='sticky' component="nav">
+            <Toolbar  sx={{display: 'flex', justifyContent: 'space-between'}}>
                 <Box>
                     <IconButton size='large' edge='start' color='inherit' aria-label='logo'>
                         <Link to="/" 
