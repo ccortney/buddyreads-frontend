@@ -16,11 +16,6 @@ const RatingDialog = ({bookData, buddyRead, ratingOpen, setRatingOpen, rating, s
     const {currentUser} = useContext(UserContext);
     const [ratingUpdated, setRatingUpdated] = useState(false)
 
-    const handleRatingSkip = () => {
-        setRating(rating)
-        setRatingOpen(false)
-    }
-
     const handleRatingClose = async () => {
         setRatingOpen(false)
         if (ratingUpdated) {
@@ -47,7 +42,6 @@ const RatingDialog = ({bookData, buddyRead, ratingOpen, setRatingOpen, rating, s
               />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleRatingSkip}>Cancel</Button>
           <Button onClick={handleRatingClose}>Save Rating</Button>
         </DialogActions>
       </Dialog>
