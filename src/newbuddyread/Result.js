@@ -1,86 +1,76 @@
-import { useEffect, useState } from "react";
-import {createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
-import {  Typography, 
-          Button, 
-          Box, 
-          Card, 
-          CardContent, 
-          CardMedia, 
-          CardActions, 
-          Collapse } from '@mui/material';
+import { useState} from "react";
+import {createTheme, responsiveFontSizes } from '@mui/material/styles';
+import {  Typography, Button, Box, Stack} from '@mui/material';
 import BuddyReadForm from "./BuddyReadForm";
-import defaultImage from "../bookcovernotfound.png"; 
 
 /** Show limited information about a book
  * 
  * Is rendered by SearchResults to show a "card" for each book.
  * When card is clicked, new buddy read form appears. 
  *
- * Routed as /buddyreads/new
- * SearchResults -> Result -> { BuddyReadForm }
+ * It is rendered by SearchResults 
+ * 
+ * {SearchResults} -> {Result} -> { BuddyReadForm }
  */
 
 
 const Result = ({book, formData, setFormData, handleFormChange, handleFormSubmit}) => {
   
   
-  const [expanded, setExpanded] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
 
   const handleClick = (book) => {
     setFormData(data => ({...data, bookId: book.id, bookTitle: book.title}));
-    setExpanded(!expanded);
+    setShowForm(!showForm)
   }
 
   return (
+    <Box sx={{border: "solid darkgrey", borderRadius: 2, m: 1, p: 1, width: {xs: 300, sm: 500}, mx: 'auto'}} >
+        <Stack direction="row" align="left">
+            <Box>
+              <img
+                width='75'
+                height='113'
+                src={book.image}
+                alt={book.title}
+              />
+            </Box>
 
-    <Card sx={{ display: 'flex' }}>
-      <ThemeProvider theme={theme}>
-      <CardMedia
-        component="img"
-        sx={{width: 90, height: 135, p: 2}}
-        image={book.image}
-        alt={book.title}
-      />
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-      <CardContent sx={{ flex: '1 0 auto' }}>
-        <Typography component="div" variant="h6" noWrap={true}>
-          {book.title}
-        </Typography>
-        <Typography variant="subtitle1" color="text.secondary"  noWrap={true}>
-          By {book.authors}
-        </Typography>
-        <Typography variant="subtitle1" color="text.secondary">
-          {book.pageCount} pages  |  Published: {book.publishedDate}
-        </Typography>
-        <Typography variant="subtitle1" color="text.secondary">
-          ISBN {book.isbn}
-        </Typography>
+            <Box sx={{pl: 1}}>
+              <Typography>
+                {book.title}
+              </Typography>
+              <Typography variant="subtitle2" color="text.secondary"  noWrap={true}>
+                By {book.authors}
+              </Typography>
+              <Typography variant="subtitle2" color="text.secondary">
+                {book.pageCount} pages
+              </Typography>
+              <Typography variant="subtitle2" color="text.secondary">
+                 Published: {book.publishedDate}
+              </Typography>
+              <Typography variant="subtitle2" color="text.secondary">
+                ISBN {book.isbn}
+              </Typography>
+            </Box>
+        </Stack>
 
-      </CardContent>
-      <CardActions disableSpacing>
-        <Button 
-          variant='contained' 
-          onClick={() => handleClick(book)}
-        >
-          Start Buddy Read
-        </Button>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
+      <Box >
+        {showForm ?
           <BuddyReadForm
             formData={formData} 
+            setShowForm={setShowForm}
             handleFormChange={handleFormChange}
             handleFormSubmit={handleFormSubmit} 
-            book={book}
           />
-        </CardContent>
-      </Collapse>
+        : 
+          <Button onClick={() => handleClick(book)}>Start Buddy Read</Button>
+        }
       </Box>
-      </ThemeProvider>
-    </Card>
+    </Box>
   );
 }
 

@@ -1,33 +1,33 @@
-import { Grid } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import Result from "./Result";
 import ErrorAlert from "../common/ErrorAlert";
 
-/** Shows list of books. 
+/** Shows list of books from book search. 
  *
- * Re-loads book results on submit from search form.
+ * Re-loads Result component for each result on submit from search form.
+ * 
+ * Rendered by NewBuddyRead component 
  *
- * This is routed to at /buddyreads/new
- *
- * NewBuddyRead -> BookSearch -> SearchResults -> { Result, ErrorAlert }
+ * NewBuddyRead -> {SearchResults} -> { Result, ErrorAlert }
  */
-
 
 const SearchResults = ({books, setFormData, formData, handleFormChange, handleFormSubmit}) => {
     return (
-        <Grid container spacing={2} sx={{pl: 2, pr: 2}}>
-            {books ? books.map(book => (
-            <Grid item xs={12} md={6} key={book.id}>
-                <Result 
-                    book={book} 
-                    formData={formData} 
-                    setFormData={setFormData}
-                    handleFormChange={handleFormChange}
-                    handleFormSubmit={handleFormSubmit} 
-                />
-            </Grid>
-            )) : <ErrorAlert severity='error' messages={["No Books Found"]}/> 
-        } 
-        </Grid>
+        <Box >
+            <Stack direction="column">
+                {books ? books.map(book => (
+                    <Result 
+                        key={book.id} 
+                        book={book} 
+                        formData={formData} 
+                        setFormData={setFormData}
+                        handleFormChange={handleFormChange}
+                        handleFormSubmit={handleFormSubmit} 
+                    />
+                    )) : <ErrorAlert severity='error' messages={["No Books Found"]}/> 
+                } 
+            </Stack>
+        </Box>
     )
 }
 

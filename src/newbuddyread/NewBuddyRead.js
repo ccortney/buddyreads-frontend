@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Typography } from "@mui/material"
+import { Typography, Box } from "@mui/material"
 import GoogleBooksApi from "../api/bookApi";
 import BuddyReadApi from "../api/api";
 import SearchResults from "./SearchResults";
@@ -7,17 +7,18 @@ import BookSearch from "./BookSearch";
 import ErrorAlert from "../common/ErrorAlert";
 import UserContext from "../auth/UserContext";
 
-/** Show page with book search and search results. 
+/** Show component with book search and search results. 
  *
- * When a search result is clicked, a form is shown for users
- * to enter buddy's email.  
- * Submitting the form calls the API to create new buddy read.
+ * Submitting a book search form will render top 10 results from GoogleBooksApi.
+ * 
+ * When a search result is clicked, a form is shown for users to enter buddy's email.  
+ * Submitting the form calls the BuddyReadsAPI to create new buddy read.
  *
  * Confirmation of a successful save is a simple <ErrorAlert>
  *
- * This is routed to at /buddyreads/new
+ * It is rendered by Dashboard. 
  *
- * AppRoutes -> NewBuddyRead -> { BookSearch, SearchResults, ErrorAlert }
+ * Dashboard -> {NewBuddyRead} -> { BookSearch, SearchResults, Result, BuddyReadForm, ErrorAlert }
  */
 
 const NewBuddyRead = () => {
@@ -86,8 +87,8 @@ const NewBuddyRead = () => {
 
 
     return (
-        <div>
-            <Typography gutterBottom variant="h5" component="div" sx={{pt: 3}} align="center">
+        <Box display="block" justifyContent="center">
+            <Typography gutterBottom variant="h5" component="div" sx={{pt: {sm: 3}}} align="center">
                     Start a New Buddy Read
             </Typography>
 
@@ -106,9 +107,8 @@ const NewBuddyRead = () => {
                     formData={formData} 
                     handleFormChange={handleFormChange}
                     handleFormSubmit={handleFormSubmit} 
-                    setShowResults={setShowResults}
                 /> : null}
-        </div>
+        </Box>
 
     )
 }

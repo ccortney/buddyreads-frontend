@@ -1,24 +1,23 @@
-import { Grid, Box, TextField, Button } from "@mui/material"
+import { Box, TextField, Button } from "@mui/material"
 
-/** Book search widget.
+/** Book search component.
  *
- * Appears on NewBuddyRead component
+ * Rendered by NewBuddyRead component
  *
  * This component doesn't *do* the searching, but it renders the search
- * form and calls the `handleSearchSubmit` function prop that runs in a parent to do the
- * searching.
+ * form and calls the `handleSearchSubmit` function prop that runs in 
+ * NewBuddyRead component to do the searching.
  *
- *  NewBuddyRead  -> BookSearch
+ *  Dashboard => {NewBuddyRead}  -> {BookSearch}
  */
 
 const BookSearch = ({handleSearchChange, handleSearchSubmit, searchField}) => {
     return (
-        <Grid container align='center' sx={{justifyContent:'center'}}>
-        
+        <Box align='center' sx={{justifyContent:'center'}}>
             <form onSubmit={handleSearchSubmit}>
                 <Box sx={{ display: 'flex', justifyContent:  'center' }}>
                     <TextField
-                        label="Book Title"
+                        label="Search for a Book"
                         id="searchField"
                         name="searchField"
                         value={searchField}
@@ -30,7 +29,7 @@ const BookSearch = ({handleSearchChange, handleSearchSubmit, searchField}) => {
                     </Box>
                 </Box>
             </form>
-        </Grid>
+        </Box>
     )
 }
 
